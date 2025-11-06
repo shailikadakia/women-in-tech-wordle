@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { GameBoard } from './components/GameBoard';
 import { Keyboard } from './components/Keyboard';
 import { ResultModal } from './components/ResultModal';
-import { getDailyWord, getTodayDateString } from './data/women-in-tech';
-import { toast } from 'sonner@2.0.3';
-
+import { getDailyWord, getTodayDateString, WomanInTech } from './api/women-in-tech';
+import { toast } from 'sonner';
+import { getRandomName, getWITInfo } from './api/women-in-tech';
 interface GameState {
   guesses: string[];
   currentGuess: string;
@@ -36,6 +36,37 @@ export default function App() {
   });
 
   const [showResult, setShowResult] = useState(false);
+  const [randomId, setRandomId] = useState<number | null>(null);
+  const [randomWoman, setRandomWoman] = useState<WomanInTech | null>(null);
+
+  // 1) Fetch the random id once
+  useEffect(() => {
+    (async () => {
+      try {
+        const id = await getRandomName();
+        console.log('random id:', id);
+        setRandomId(id);
+      } catch (e) {
+        console.error('getRandomId failed:', e);
+      }
+    })();
+  }, []);
+
+  // 2) When id is set, fetch the woman
+  useEffect(() => {
+    if (randomId === null) return;
+    (async () => {
+      try {
+        console.log('fetching woman with id:', randomId);
+        const w = await getWITInfo(randomId);
+        console.log('woman:', w);
+        setRandomWoman(w);
+      } catch (e) {
+        console.error('getWITInfo failed:', e);
+      }
+    })();
+  }, [randomId]);
+
 
   // Save game state to localStorage
   useEffect(() => {

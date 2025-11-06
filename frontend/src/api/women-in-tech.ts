@@ -69,10 +69,48 @@ export function getDailyWord(): WomanInTech {
   
   const index = diffDays % womenInTech.length;
   return womenInTech[index];
+  
 }
 
 // Get today's date string for localStorage key
 export function getTodayDateString(): string {
   const today = new Date();
   return today.toISOString().split('T')[0];
+}
+
+import express from 'express';
+import cors from 'cors';
+
+const headers = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+}
+const options = {
+  method: 'GET',
+  headers: headers
+
+}
+
+const URLBASE = 'http://127.0.0.1:8000'
+export async function getRandomName() {
+  const url = `${URLBASE}/women/get-random-id`
+  console.log(url)
+  const result = await fetch (url, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  })
+  if (!result.ok) throw new Error(`HTTP ${result.status}`);
+  return await result.json();
+}
+
+export async function getWITInfo(id: number) {
+  if (id === undefined || id === null || Number.isNaN(id)) {
+    throw new Error('getWITInfo called with invalid id');
+  }
+  const res = await fetch(`${URLBASE}/women/${id}`, { method: 'GET' });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return await res.json();
 }
