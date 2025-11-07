@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "./ui/dialog";
 import { Button } from "./ui/button";
-import type { WomanInTech } from "../data/women-in-tech";
+import type { WomanInTech } from "../api/women-in-tech";
 import { ExternalLink, Sparkles } from "lucide-react";
 
 interface ResultModalProps {
