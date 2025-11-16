@@ -33,7 +33,7 @@ The UI was initially generated using **Figma AI** and refined manually.
 ---
 
 ## 📂 Project Structure
-
+```
 women-in-tech-wordle/
 │
 ├── backend/
@@ -47,7 +47,7 @@ women-in-tech-wordle/
     ├── components/
     ├── assets/
     └── ...
-
+```
 ---
 
 ## 🚀 Getting Started
