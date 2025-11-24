@@ -5,6 +5,8 @@ A daily Wordle-style guessing game that celebrates pioneering women in technolog
 Built with a **React frontend** and a **FastAPI backend**, this project delivers a clean, modern, educational experience.  
 The UI was initially generated using **Figma AI** and refined manually.
 
+It is deployed using Vercel and Render [women-in-tech-wordle.vercel.app](women-in-tech-wordle.vercel.app)
+
 ---
 
 ## ✨ Features
